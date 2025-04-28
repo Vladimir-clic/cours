@@ -28,3 +28,14 @@ def fonction ():
   print(mot)
 fonction()
 ```
+On peut mettre des variables entre parenthèse de notre fonction qui sera réutilisé lors de l'appel de cette même fonction. Par exemple, si notre fonction est un calcul avec une inconnue, on peut être tenté d'essayer plusieurs résultats.
+```python
+def calcul (x):
+  resultat = x*2
+  print(resultat)
+calcul(2)
+calcul(5)
+```
+
+##Commandes et significations : 
+
