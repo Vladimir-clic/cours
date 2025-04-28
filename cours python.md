@@ -14,6 +14,7 @@ Pour écrire quelque chose sur le terminal, on utilise la commande ```print```, 
 print("Hello World")
 ```
 
+###Les fonctions :
 
 Les fonctions sont des éléments essentiels en python, elles permettent de regrouper du code que l'on peut facilement appeler
 ```python
