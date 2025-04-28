@@ -86,7 +86,7 @@ elif nombre ==20:
 else:
     print("un nombre reste un nombre")
 ```
-## Commandes et significations : 
+## Fonctions intégrées et significations : 
 ### ```map()``` pour transformer une liste élément par élément :
 ```python
 map(fonction, liste)
