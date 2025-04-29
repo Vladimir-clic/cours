@@ -1,4 +1,4 @@
-# Cours Python
+# :arrow_forward: Cours Python
 Listes de commandes python que j'ai pu apprendre et que je répertorie ici, il y a également des conseils ou d'autres éléments un peu randoms pour que je puisse y avoir facilement accès. Je vais probablement modifier souvent cette liste en y ajoutant, modifiant des éléments (voir en corrigeant des erreurs)
 ## Les bases :
 
