@@ -129,6 +129,13 @@ tri_par_longueur = sorted(noms, key=lambda x: len(x))
 print(tri_par_longueur)  # ['Bob', 'Alice', 'Christophe']
 ```
 
+### ```eval()``` pour transformer une chaine de caractère en objet
+Avec ```eval```, on transforme une chaine de caractère en instruction intéprétable
+```python
+print(eval("6*7"))
+```
+Cela donnera un résultat de 42
+
 ## Les fonctions anonymes :
 (pas clair même pour moi)
 ### La fonction anonyme ```lambda```
