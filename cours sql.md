@@ -21,8 +21,15 @@ Autre rajout : ```CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;``` à copier
 ### Création de ```TABLE``` :
 Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même contiennent des informations, elles servent à structurer les informations au seins de la ```DATABASE```.
 On la crée comme ci :
-```
 
+
+## Type de langage SQL :
+o	Principales commandes SQL :
+
+DDL (Data Definition Language) : CREATE, ALTER, DROP
+DML (Data Manipulation Language) : SELECT, INSERT, UPDATE, DELETE
+DCL (Data Control Language) : GRANT, REVOKE
+||TCL (Transaction Control Language)||COMMIT, ROLLBACK, SAVEPOINT
 
 
 
