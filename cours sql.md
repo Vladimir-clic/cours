@@ -26,10 +26,12 @@ On la crée comme ci :
 ## Type de langage SQL :
 o	Principales commandes SQL :
 
-DDL (Data Definition Language) : CREATE, ALTER, DROP
-DML (Data Manipulation Language) : SELECT, INSERT, UPDATE, DELETE
-DCL (Data Control Language) : GRANT, REVOKE
-||TCL (Transaction Control Language)||COMMIT, ROLLBACK, SAVEPOINT
+|nom|Commandes|
+|---|---|
+|DDL (Data Definition Language)| CREATE, ALTER, DROP|
+|DML (Data Manipulation Language)| SELECT, INSERT, UPDATE, DELETE|
+|DCL (Data Control Language) |GRANT, REVOKE|
+|TCL (Transaction Control Language)|COMMIT, ROLLBACK, SAVEPOINT|
 
 
 
