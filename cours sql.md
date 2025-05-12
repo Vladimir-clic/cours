@@ -17,3 +17,14 @@ USE magasin;
 ```
 Le ```DROP DATABASE IF EXISTS magasin;``` permet de détruire la base de donnée **magasin** si elle existe, cela permet de rendre le code **idem potant**.
 Autre rajout : ```CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;``` à copier coller, est utilisé pour définir le jeu de caractères et le classement d'une colonne ou d'une base de données dans SQL.
+
+### Création de ```TABLE``` :
+Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même contiennent des informations, elles servent à structurer les informations au seins de la ```DATABASE```.
+On la crée comme ci :
+```
+
+
+
+
+
+
