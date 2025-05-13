@@ -1,6 +1,6 @@
 # Présentation du langage sql
 Le langage sql sert à structurer des bases de données : en voilà les bases.
-site pour faire des diagrammes sql : https://dbdiagram.io/d
+Site pour faire des diagrammes sql : https://dbdiagram.io/d
 
 ## Comment créer des bases de données ?
 ### Création de ```DATABASE``` :
