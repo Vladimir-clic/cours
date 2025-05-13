@@ -24,7 +24,7 @@ Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même
 On la crée comme ci :
 
 
-## Type de langage SQL :
+## :pushpin: Type de langage SQL : (à continuer)
 o	Principales commandes SQL :
 
 |nom|Commandes|
@@ -35,6 +35,8 @@ o	Principales commandes SQL :
 |TCL (Transaction Control Language)|COMMIT, ROLLBACK, SAVEPOINT|
 
 
+## Gérer une base de données
+Une fois que l'on a notre base de donnée, nous pouvons y apporter des modifications, mise à jour, ect..., nous allons voir quelles commandes nous le permettent :
 
 
 
