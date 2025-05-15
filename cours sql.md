@@ -66,3 +66,18 @@ ALTER TABLE tableA
 ADD CONSTRAINT fk_tableA_tableB
 FOREIGN KEY tableA(id_tableA) REFERENCES tableB(id_tableA);
 ```
+
+### Joindre des données avec les différents types de ```JOIN```
+#### La jointure commune avec ```INNER JOIN``` :
+
+Dans le langage SQL la commande ```INNER JOIN```, aussi appelée ```EQUIJOIN```, est un type de jointures très communes pour lier plusieurs tables entre-elles. Cette commande retourne les enregistrements lorsqu’il y a au moins une ligne dans chaque colonne qui correspond à la condition.
+|table 1|table 2|
+|---|---|
+|id|fk_id|
+
+```sql
+SELECT *
+FROM table1
+INNER JOIN table2 ON table1.id = table2.fk_id
+```
+
