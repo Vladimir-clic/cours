@@ -5,7 +5,7 @@ Site pour faire des diagrammes sql : https://dbdiagram.io/d
 ## Comment créer des bases de données ?
 ### Création de ```DATABASE``` :
 On commence toujours par créer notre ```DATABASE``` qui nous permettra de stoquer nos tables, données, ects...
-```sql
+```sql 
 CREATE DATABASE magasin;
 USE magasin;
 ```
