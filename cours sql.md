@@ -6,7 +6,7 @@ Site pour faire des diagrammes sql : https://dbdiagram.io/d
 ### Création de ```DATABASE``` :
 On commence toujours par créer notre ```DATABASE``` qui nous permettra de stoquer nos tables, données, ects...
 ```sql 
-CREATE DATABASE magasin;
+CREATE DATABASE magasin; 
 USE magasin;
 ```
 Ici, on crée la base de donnée puis on l'utilise. On retient que dans cette partie, les commandes sont séparées par des ```;``` mais cela ne sera pas toujours le cas (explication plus tard). Nénamoins, nous allons compllexifier légèrement notre code (c'est souvent comme ça que nous commencerons la création d'une ```DATABASE``` :
