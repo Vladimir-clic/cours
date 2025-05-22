@@ -1,6 +1,15 @@
 # Présentation du langage sql
 Le langage sql sert à structurer des bases de données : en voilà les bases.
 Site pour faire des diagrammes sql : https://dbdiagram.io/d
+\
+Il existe 2 types de relations entre les tables :\
+-relation avec une clé étrangère\
+-relation avec une table de jointure
+
+
+
+
+
 
 ## Comment créer des bases de données ?
 ### Création de ```DATABASE``` :
@@ -20,42 +29,14 @@ USE magasin;
 Le ```DROP DATABASE IF EXISTS magasin;``` permet de détruire la base de donnée **magasin** si elle existe, cela permet de rendre le code **idem potant**.
 Autre rajout : ```CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;``` à copier coller, est utilisé pour définir le jeu de caractères et le classement d'une colonne ou d'une base de données dans SQL.
 
+
+
+
+
+
 ### Création de ```TABLE``` :
 Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même contiennent des informations, elles servent à structurer les informations au seins de la ```DATABASE```. (on reviendra dessus quand on abordera la commande ```CREATE```
 On la crée comme ci :
-```sql
-CREATE TABLE IF NOT EXISTS chat(
- id INT NOT NULL AUTO_INCREMENT,
- nom VARCHAR(50) NOT NULL,
- yeux VARCHAR(20) NOT NULL,
- age INT NOT NULL,
- CONSTRAINT pk_chat PRIMARY KEY (id)
-)ENGINE=INNODB;
-```
-
-### Clé primaire et étrangères :
-Une clé étrangère est une colonne (ou plusieurs colonnes) d'une base de données qui est reliée à la colonne clé primaire d'une autre table. La clé primaire en question est un simple identifiant et la clé étrangère est sa serrure, il peut y avoir plusieurs clé étrangère pour une clé primaire mais l'inverse ne se fait pas.
-
-
-## :pushpin: Type de langage SQL : (à continuer)
-o	Principales commandes SQL :
-
-|nom|Commandes|
-|---|---|
-|DDL (Data Definition Language)| CREATE, ALTER, DROP|
-|DML (Data Manipulation Language)| SELECT, INSERT, UPDATE, DELETE|
-|DCL (Data Control Language) |GRANT, REVOKE|
-|TCL (Transaction Control Language)|COMMIT, ROLLBACK, SAVEPOINT|
-
-
-## Gérer une base de données
-Une fois que l'on a notre base de donnée, nous pouvons y apporter des modifications, mise à jour, ect..., nous allons voir quelles commandes nous le permettent :
-
-## Commandes : 
-
-### Créer une table avec ```CREATE``` (à continuer)
-Nous l'avons vu plus tôt, ce mot clé sert à créer aussi bien des tables que des bases de donnée\
-C'est une commande à **absolument** connaitre en sql, elle est vitale, nottement pour la création de tables qui vont nous servir à ranger nos colonnes où l'on structurera nos données
 ```sql
 CREATE TABLE nom_de_la_table
 (
@@ -77,7 +58,83 @@ CREATE TABLE chat (
 ```
 Il y a beaucoup à expliquer : \
 ```CREATE TABLE chat ()``` : Commande pour créer la table nommée "chat" et des parenthèses qui englobe tout le reste du code \
-```chat_id, Nom, Couleur_poils, Couleur_yeux, poids``` : Ce sont les noms des colonnes que contient la talbe ```chat```
+```chat_id, Nom, Couleur_poils, Couleur_yeux, poids``` : Ce sont les noms des colonnes que contient la talbe ```chat``` \
+```INT``` : est un type, indiquant que la colonne peut contenir des nombres
+```VARCHAR(50)``` : est un type, indiquant que la colonne peut contenir des données textuelles allant de 1 à 100 caractères. \
+```AUTO_INCREMENT``` : est une indication grâce à laquelle les chiffres vont s'écrire automatiquement de 1 jusqu'a la fin des autres colonnes \
+```PRIMARY KEY``` : indique que ```chat_id``` est une clé primaire (nous verrons ce concept plus tard)
+```NOT NULL``` : indique que les données dans cette colonne ne peuvent être nulle.
+\
+Cela peut sembler difficile à comprendre au début mais tout cela est nécessaire pour créer une table complète, vous remarquez un pattern : le nom de la colonne + le type de données (et sans virgules) mais on en identifie une qui semble plus singulière : ```chat_id```, pour chaque table, on doit pouvoir y trouver une colonne ID qui servira de clé primaire.
+
+
+
+
+
+
+### Clé primaire et étrangères :
+Une clé étrangère est une colonne (ou plusieurs colonnes) d'une base de données qui est reliée à la colonne clé primaire d'une autre table. La clé primaire en question est un simple identifiant et la clé étrangère est sa serrure, il peut y avoir plusieurs clé étrangère pour une clé primaire mais l'inverse ne se fait pas.\
+La nomination d'une clé primaine lors de la création de la table s'écrit ainsi : ```PRIMARY KEY```. Elle permettra de créer des liens entre plusieurs tables\
+Voilà comment on fait une relation de clé primaire à clé étrangère :\
+Déjà : voici nos table fictives pour plus de compréhension
+**Clients**
+|Nom|Type|
+|---|---|
+|ID_clients|PRIMARY KEY|
+|Nomsclient|VARCHAR(50)|
+|Ageclient|INT|
+|Datenaissance|DATE|
+
+**Ticket**
+|Nom|Type|
+|---|---|
+|ID_Ticket|PRIMARY KEY|
+|Clients_ID|INT|
+|Produit_ID|INT|
+|Date|DATE|
+
+Maintenant que nous avons nos table, nous allons lier la talbe ```Clients``` avec la table ```Ticket``` en ajoutant cette ligne de code dans la table ```Ticket```: \
+```sql
+FOREIGN KEY (Clients_ID) REFERENCES Clients(ID_clients)
+```
+Ce qui nous donne un code qui ressemble à ça : 
+```
+CREATE TABLE Ticket (
+    ID_Ticket INT AUTO_INCREMENT PRIMARY KEY,
+    Clients_ID NOT NULL,
+    Produit_ID INT NOT NULL,
+    Date DATE
+);
+```
+
+[a continuer)
+
+
+
+
+
+
+
+## :pushpin: Type de langage SQL : (à continuer)
+o	Principales commandes SQL :
+
+|nom|Commandes|
+|---|---|
+|DDL (Data Definition Language)| CREATE, ALTER, DROP|
+|DML (Data Manipulation Language)| SELECT, INSERT, UPDATE, DELETE|
+|DCL (Data Control Language) |GRANT, REVOKE|
+|TCL (Transaction Control Language)|COMMIT, ROLLBACK, SAVEPOINT|
+
+
+## Gérer une base de données
+Une fois que l'on a notre base de donnée, nous pouvons y apporter des modifications, mise à jour, ect..., nous allons voir quelles commandes nous le permettent :
+
+## Commandes : 
+
+### Créer une table avec ```CREATE``` (à continuer)
+Nous l'avons vu plus tôt, ce mot clé sert à créer aussi bien des tables que des bases de donnée\
+C'est une commande à **absolument** connaitre en sql, elle est vitale, nottement pour la création de tables qui vont nous servir à ranger nos colonnes où l'on structurera nos données
+
 
 
 ### Modifier une table existante avec ```ALTER TABLE``` : (DDL)
