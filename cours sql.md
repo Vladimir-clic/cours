@@ -6,6 +6,8 @@ Il existe 2 types de relations entre les tables :\
 -relation avec une clé étrangère\
 -relation avec une table de jointure
 
+En sql, on considère que le signe ```*``` signifie "tout"
+
 
 
 
@@ -46,7 +48,7 @@ CREATE TABLE nom_de_la_table
     colonne4 type_donnees
 )
 ```
-Mais en voilà un exemple plus concrès
+On note qu'il n'y a pas de virgule après la ```colonne4```, voilà un exemple plus concrès
 ```sql
 CREATE TABLE chat (
     chat_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,11 +61,11 @@ CREATE TABLE chat (
 Il y a beaucoup à expliquer : \
 ```CREATE TABLE chat ()``` : Commande pour créer la table nommée "chat" et des parenthèses qui englobe tout le reste du code \
 ```chat_id, Nom, Couleur_poils, Couleur_yeux, poids``` : Ce sont les noms des colonnes que contient la talbe ```chat``` \
-```INT``` : est un type, indiquant que la colonne peut contenir des nombres
+```INT``` : est un type, indiquant que la colonne peut contenir des nombres\
 ```VARCHAR(50)``` : est un type, indiquant que la colonne peut contenir des données textuelles allant de 1 à 100 caractères. \
 ```AUTO_INCREMENT``` : est une indication grâce à laquelle les chiffres vont s'écrire automatiquement de 1 jusqu'a la fin des autres colonnes \
-```PRIMARY KEY``` : indique que ```chat_id``` est une clé primaire (nous verrons ce concept plus tard)
-```NOT NULL``` : indique que les données dans cette colonne ne peuvent être nulle.
+```PRIMARY KEY``` : indique que ```chat_id``` est une clé primaire (nous verrons ce concept plus tard)\
+```NOT NULL``` : indique que les données dans cette colonne ne peuvent être nulle.\
 \
 Cela peut sembler difficile à comprendre au début mais tout cela est nécessaire pour créer une table complète, vous remarquez un pattern : le nom de la colonne + le type de données (et sans virgules) mais on en identifie une qui semble plus singulière : ```chat_id```, pour chaque table, on doit pouvoir y trouver une colonne ID qui servira de clé primaire.
 
@@ -103,11 +105,17 @@ CREATE TABLE Ticket (
     ID_Ticket INT AUTO_INCREMENT PRIMARY KEY,
     Clients_ID NOT NULL,
     Produit_ID INT NOT NULL,
-    Date DATE
+    Date DATE,
+    FOREIGN KEY (Clients_ID) REFERENCES Clients(ID_clients)
 );
 ```
 
-[a continuer)
+Nous aurions également put le rajouter après la création de la table avec la commande ```INNER JOIN``` que nous verrons après :wink:
+```sql
+INNER JOIN Ticket ON Ticket.Clients_ID = Clients.ID_Clients
+```
+
+
 
 
 
@@ -129,15 +137,31 @@ o	Principales commandes SQL :
 ## Gérer une base de données
 Une fois que l'on a notre base de donnée, nous pouvons y apporter des modifications, mise à jour, ect..., nous allons voir quelles commandes nous le permettent :
 
+
+
+
+
+
+
+
 ## Commandes : 
 
-### Créer une table avec ```CREATE``` (à continuer)
+### DDL : Créer une table avec ```CREATE``` :
 Nous l'avons vu plus tôt, ce mot clé sert à créer aussi bien des tables que des bases de donnée\
-C'est une commande à **absolument** connaitre en sql, elle est vitale, nottement pour la création de tables qui vont nous servir à ranger nos colonnes où l'on structurera nos données
+C'est une commande à **absolument** connaitre en sql, elle est vitale, nottement pour la création de tables qui vont nous servir à ranger nos colonnes où l'on structurera nos données. Elle s'écrit ainsi : 
+```sql
+CREATE TABLE
+```
+
+### DDL : Supprimer un élément avec ```DROP``` :
+L'inverse de ```CREATE``` et assez similaire dans sa structure, il suffit d'écrire le mot clé, puis le type de structure que l'on souhaite supprimer, puis son nom :
+```sql
+DROP DATABASE base_de_donnée
+```
 
 
 
-### Modifier une table existante avec ```ALTER TABLE``` : (DDL)
+### DDL : Modifier une table existante avec ```ALTER TABLE``` :
 La commande ```ALTER TABLE``` en SQL permet de modifier une table existante. Idéal pour ajouter une colonne, supprimer une colonne ou modifier une colonne existante, par exemple pour changer le type. Elle s'écrit ainsi : 
 ```sql
 ALTER TABLE nom_table
@@ -149,7 +173,6 @@ Maintenant, voilà quelques type de commande que nous pouvons utiliser avec ```A
 ```MODIFY``` pour changer le type de la colonne ```MODIFY nom_colonne type_donnees```  
 ```CHANGE``` pour renommer une colonne (on met le nom original, puis le nouveau nom)  
 
-
 #### Utilisation d'une clé étrangère avec ```ADD CONSTRAINT```
 ```sql
 ALTER TABLE tableA
@@ -158,7 +181,19 @@ FOREIGN KEY tableA(id_tableA) REFERENCES tableB(id_tableA);
 ```
 
 
-### Suppression et mise à jour avec ```ON DELETE``` et ```ON UPDATE``` (DML)
+
+### DML : Sélectionner des éléments avec ```SELECT``` :
+Une fois que l'on a nos table remplie, nous pouvons sélectionner des éléments de cette table grâce à ```SELECT``` qui est accompagné de ```FROM``` :
+```sql
+SELECT * FROM table1
+```
+Ici, on sélectionne tous les éléments de la table. Cette sélection créera un tableau ordonné avec toutes les données. On peut complexifier cette requête si l'on souhaite afficher seulement certaines colonnes ou certaines données dans un ordre précis
+
+
+
+
+
+### DML : Suppression et mise à jour avec ```ON DELETE``` et ```ON UPDATE``` (DML)
 
 ```ON DELETE CASCADE``` : Supprime automatiquement toutes les lignes associées si la ligne référencée est supprimée.
 ```sql
