@@ -21,11 +21,20 @@ Le ```DROP DATABASE IF EXISTS magasin;``` permet de détruire la base de donnée
 Autre rajout : ```CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;``` à copier coller, est utilisé pour définir le jeu de caractères et le classement d'une colonne ou d'une base de données dans SQL.
 
 ### Création de ```TABLE``` :
-Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même contiennent des informations, elles servent à structurer les informations au seins de la ```DATABASE```.
+Chaque ```DATABASE``` possède un certain nombre de ```TABLES``` qui elles-même contiennent des informations, elles servent à structurer les informations au seins de la ```DATABASE```. (on reviendra dessus quand on abordera la commande ```CREATE```
 On la crée comme ci :
+```sql
+CREATE TABLE IF NOT EXISTS chat(
+ id INT NOT NULL AUTO_INCREMENT,
+ nom VARCHAR(50) NOT NULL,
+ yeux VARCHAR(20) NOT NULL,
+ age INT NOT NULL,
+ CONSTRAINT pk_chat PRIMARY KEY (id)
+)ENGINE=INNODB;
+```
 
-### Clé primaire et étrangères (à continuer)
-Une clé étrangère est une colonne (ou plusieurs colonnes) d'une base de données qui est reliée à la colonne clé primaire d'une autre table. La clé primaire en question est un simple identifiant 
+### Clé primaire et étrangères :
+Une clé étrangère est une colonne (ou plusieurs colonnes) d'une base de données qui est reliée à la colonne clé primaire d'une autre table. La clé primaire en question est un simple identifiant et la clé étrangère est sa serrure, il peut y avoir plusieurs clé étrangère pour une clé primaire mais l'inverse ne se fait pas.
 
 
 ## :pushpin: Type de langage SQL : (à continuer)
@@ -46,9 +55,29 @@ Une fois que l'on a notre base de donnée, nous pouvons y apporter des modificat
 
 ### Créer une table avec ```CREATE``` (à continuer)
 Nous l'avons vu plus tôt, ce mot clé sert à créer aussi bien des tables que des bases de donnée\
-
-
-à continuer...
+C'est une commande à **absolument** connaitre en sql, elle est vitale, nottement pour la création de tables qui vont nous servir à ranger nos colonnes où l'on structurera nos données
+```sql
+CREATE TABLE nom_de_la_table
+(
+    colonne1 type_donnees,
+    colonne2 type_donnees,
+    colonne3 type_donnees,
+    colonne4 type_donnees
+)
+```
+Mais en voilà un exemple plus concrès
+```sql
+CREATE TABLE chat (
+    chat_id INT AUTO_INCREMENT PRIMARY KEY,
+    Nom VARCHAR(50) NOT NULL,
+    Couleur_poils VARCHAR(100) NOT NULL,
+    Couleur_yeux VARCHAR(100) NOT NULL,
+    poids INT NOT NULL
+);
+```
+Il y a beaucoup à expliquer : \
+```CREATE TABLE chat ()``` : Commande pour créer la table nommée "chat" et des parenthèses qui englobe tout le reste du code \
+```chat_id, Nom, Couleur_poils, Couleur_yeux, poids``` : Ce sont les noms des colonnes que contient la talbe ```chat```
 
 
 ### Modifier une table existante avec ```ALTER TABLE``` : (DDL)
