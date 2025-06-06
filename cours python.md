@@ -9,6 +9,7 @@ nombre = 5
 boolean = True
 ```
 
+
 Pour écrire quelque chose sur le terminal, on utilise la commande ```print```, attention aux guillements si c'est une chaine de caractères
 ```python
 print("Hello World")
