@@ -3,7 +3,7 @@ Le langage php est utilisé pour créer des sites web (avec du html), c'est un l
 
 PHP permet de motifier un site afin d'apporter une réponse personnalisé à chaque utilisateurs
 
-Voici un exemple type de code en php :
+Voici un exemple type de code en php : 
 ```php
 <h1>My First PHP Site</h1>
 <p>This HTML will get delivered as is</p>
