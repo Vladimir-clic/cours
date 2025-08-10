@@ -1,4 +1,4 @@
-# Cours PHP :
+ # Cours PHP :
 Le langage php est utilisé pour créer des sites web (avec du html), c'est un langage flexible qui peut être exécuter sur terminal, comme langage de programmation ou pour réaliser une suite d'instruction pour l'ordinateur. 
 
 PHP permet de motifier un site afin d'apporter une réponse personnalisé à chaque utilisateurs
