@@ -171,8 +171,10 @@ public class Personne
     public string Nom { get; set; }
     public string Prenom { get; set; }
 
+// ajout d'une méthode SePrésenter
     public void SePresenter()
     {
+// la méthode écrit une phrase avec le nom et le prénom
         Console.WriteLine($"Bonjour {Prenom} {Nom} !");
     }
 }
@@ -184,9 +186,58 @@ class Program
         Personne p = new Personne();
         p.Nom = "John";
         p.Prenom = "Doe";
+// appel de la méthode
         p.SePresenter();
         
         
+    }
+}
+```
+Voilà une autre version de ce même code auquel on a rajouté une autre classe ```Adresse``` que l'on à lié à la classe ```Personne``` : 
+```c#
+public class Personne
+{
+    public string Nom { get; set; }
+
+    public string Prenom { get; set; }
+
+    // déclaration de la propriété adresse dans personne
+    public Adresse Adresse { get; set; }
+
+    public void SePresenter()
+    {
+        // ajout de l'adresse au message final
+        Console.WriteLine($"Bonjour {Prenom} {Nom} , tu habites au {Adresse.GetAdresseComplete()}!");
+    }
+}
+
+public class Adresse
+{ 
+    public string rue { get; set; }
+    public string codepostal { get; set; }
+    public string ville { get; set; }
+
+    public string GetAdresseComplete()
+    {
+        //renvoie cette phrase avec les variables de l'adresse
+        return $"Adresse  : {rue} {codepostal} {ville}";
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        // création de l'adresse
+        Adresse a = new Adresse();
+        a.rue = "4 rue des cigogne";
+        a.codepostal = "44200";
+        a.ville = "Paris";
+        
+        Personne p = new Personne();
+        p.Nom = "John";
+        p.Prenom = "Doe";
+        p.Adresse = a;
+        p.SePresenter();
     }
 }
 ```
