@@ -2,7 +2,7 @@
 
 C# (C sharp [siː.ʃɑːp] en anglais britannique) est un langage de programmation orientée objet, commercialisé par Microsoft depuis 2002[2] et destiné à développer sur la plateforme Microsoft .NET, au même titre que d’autres langages liés à cette plateforme (ex. : VB .NET, J#, etc.).
 
-## 1) premiers pas : écrire quelque chose dans la console
+## :pencil2: 1) premiers pas : écrire quelque chose dans la console
 
 ```c#
 Console.WriteLine("Hello, World!");
@@ -21,7 +21,7 @@ Console.WriteLine($"Bonjour {prenom} !");
 
 
 
-### 2) Utiliser ```DateTime```
+### :alarm_clock: 2) Utiliser ```DateTime```
 Grâce à DateTime, nous pouvons connaitre et jouer avec le temps, par exemple : 
 ```c#
 Console.WriteLine(DateTime.Now);
@@ -72,7 +72,7 @@ int diff = date2.Year - date1.Year;
 //écrire le résultat de la variable int
 Console.WriteLine($"Bravo, tu as {diff} ans");
 ```
-## 3) Les classes
+## :file_folder: 3) Les classes
 Les classes jouent un rôle important en C#, il y en a plusieurs types : 
 
 
