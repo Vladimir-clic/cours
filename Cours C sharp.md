@@ -246,3 +246,160 @@ class Program
     }
 }
 ```
+
+### Programmer sur plusieurs classes
+Il est conseillé, lorsque le programme prend en taille, de l'étaler sur plusieurs fichier.cs (qu'on appelle classe). Ici, on va créer une classe program.cs et une classe Classes.cs.
+* Program.cs instanciera les classes
+* Classes.cs les créera
+#### Program.cs :
+```c#
+// nom du projet pour lier les deux classes
+using Apprendre_injection_de_dependance;
+
+class Program
+{
+    static void Main()
+    {
+        Personne p = new Personne();
+        p.Nom = "John";
+        p.Age = 20;
+        p.SePresenter();
+
+    }
+}
+```
+#### Classes.cs
+```c#
+namespace Apprendre_injection_de_dependance;
+
+public class Personne
+{
+    public string Nom  { get; set; }
+
+    public int Age   { get; set; }
+    
+    public void SePresenter()
+    {
+        Console.WriteLine($"Je m'appelle {Nom} et j'ai {Age} ans.");
+    }
+}
+```
+Un outil utile lors de la rédaction du code est de faire **Alt + Insert** pour générer directement le code dont on a besoin
+
+### Créer des classes qui collaborent : 
+#### Program.cs :
+```c#
+using Apprendre_injection_de_dependance;
+
+class Program
+{
+    static void Main()
+    {
+        Animal an = new Animal();
+        an.Nom = "Rex";
+        an.Espece = "Chien";
+        
+        Animal an2 = new Animal();
+        an2.Nom = "Juan";
+        an2.Espece = "Chat";
+        
+        Proprietaire pro =  new Proprietaire();
+        pro.Nom = "Jérémy";
+        pro.listeAnimaux =
+        [
+            an,
+            an2
+        ];
+        pro.PresenterAnimaux();
+    }
+}
+```
+#### Classe.cs : 
+```c#
+namespace Apprendre_injection_de_dependance;
+
+public class Animal
+{
+    public string Nom { get; set; }
+    public string Espece  { get; set; }
+
+    public void FaireDuBruit()
+    {
+        Console.WriteLine("Wouf !");
+    }
+}
+
+public class Proprietaire
+{
+    public string Nom  { get; set; }
+    public List<Animal> listeAnimaux  { get; set; }
+
+    public void PresenterAnimaux()
+    {
+        foreach (var animal in listeAnimaux)
+        {
+            Console.WriteLine($"{Nom} à un {animal.Espece} qui s'appelle {animal.Nom} ");
+        }
+    }
+}
+```
+On aborde le sujet des listes, ici, on veut ajouter des informations dans une liste, des informations que l'on a pas lors de sa création.
+Une liste s'écrit ainsi : ```List<>``` elle prend en paramètre le type de données qu'elle contiendra.
+
+### Injection de dépendance manuelle :
+Une dépendance est un objet dont dépend un autre objet. Nous allons y aller étape par étape en créant un logger dans un nouveau service : 
+```c#
+public interface ILogger
+{ 
+    void Log(string message);
+}
+```
+Ici, on définit le contract que le logger doit respecter, à savoir le fait d'envoyer un message string
+```c#
+public class ConsoleLogger : ILogger
+{
+    public void Log(string message)
+    {
+        Console.WriteLine($"[Console] {message}");
+    }
+}
+```
+Création d'une classe ConsoleLogger qui prend en paramètre Ilogger et qui va définir comment le log se présentera
+
+```c#
+public class ServiceUtilisateur
+{
+
+    // 🔸 Dépendance : notre service dépend d’un logger.
+    // Mais on ne le crée pas ici. On le reçoit de l’extérieur (c’est l’injection).
+    private readonly ILogger _logger;
+
+    // 🔸 Injection de dépendance par constructeur
+    // On "injecte" un objet implémentant ILogger lors de la création de ServiceUtilisateur.
+    public ServiceUtilisateur(ILogger logger)
+    {
+        _logger = logger;
+    }
+    // 🔸 Une méthode qui utilise le logger
+    public void AjouterUtilisateur(string nom)
+    {
+        // Ici, on se fiche de savoir quel type de logger est utilisé.
+        // On appelle simplement la méthode Log du contrat ILogger.
+        _logger.Log($"Utilisateur {nom} ajouté !");
+    }
+}
+```
+```c#
+class Program
+{
+    static void Main()
+    {
+        // 🔸 On crée manuellement un logger pour la console
+        ILogger consoleLogger = new ConsoleLogger();
+
+        // 🔸 On injecte ce logger dans notre service
+        var serviceConsole = new ServiceUtilisateur(consoleLogger);
+
+        // 🔸 On utilise le service, qui loguera via la console
+        serviceConsole.AjouterUtilisateur("Alice");
+```
