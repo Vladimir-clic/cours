@@ -163,3 +163,17 @@ Autre exemple à deux arguments :
 multiplie = lambda a, b: a * b
 print(multiplie(3, 4))  # Affiche 12
 ```
+## B2
+### Calculer la suite de fibonnaci : 
+```python
+def fibo(n):
+    nb1 = 1
+    nb2 = 0
+    for i in range(n):
+        result = nb1 + nb2
+        print(i, " opération : ", result)
+        nb2 = nb1
+        nb1 = result
+
+fibo(50)
+```
