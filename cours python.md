@@ -177,3 +177,101 @@ def fibo(n):
 
 fibo(50)
 ```
+### Calculatrice : 
+```python
+print("Entre une opération mathématique : (avec des espaces entre les symboles)")
+operation = input().split()
+print (operation)
+if operation[1] == "+":
+        print(int(operation[0]) + int(operation[2]))
+elif operation[1] == "/":
+        print(int(operation[0]) // int(operation[2]))
+elif operation[1] == "*":
+        print(int(operation[0]) * int(operation[2]))
+elif operation[1] == "-":
+        print(int(operation[0]) - int(operation[2]))
+else:
+        print("Operation invalide : l'élément ", operation[1], " n'est pas traité.")
+```
+
+### Jeux du pendu : 
+```python
+def pendu(mot):
+    
+    listmot = list(mot)
+    print(listmot)
+    
+    listdevine = []
+
+    for i in range(len(listmot)):
+        listdevine.append("_")
+    print(listdevine)
+
+    essais = 0
+
+    while listmot != listdevine:
+
+        print("Essaie de trouver le mot avec des lettres")
+        lettre = input()
+
+        for i in range(len(listmot)):
+            if listmot[i] == lettre:
+                listdevine[i] = lettre
+                print(listdevine)
+        essais +=1
+
+
+    print("bravo, tu as réussi en ", essais)
+
+pendu("hello")
+```
+
+### Match Pattern : 
+```python
+import re
+def match_pattern(text, pattern):
+    
+    match = re.search(pattern, text)
+    
+    if match:
+        print(f"Match found: {match.group()}")
+        print(f"Start index: {match.start()}")
+        print(f"End index: {match.end()}")
+        print(f"Span: {match.span()}")
+    else:
+        print("No match found.")
+
+
+match_pattern("abcdefghijklmnopqrstuvwxyz", "jkl")
+```
+### Algoritme de Luhn (imparfait) : 
+```python
+def algodeluhn(codecarte):
+    print(codecarte)
+
+    listchiffre = list(str(codecarte))
+    print(listchiffre)
+    total = 0
+
+    for i in range(1,len(listchiffre),2):
+        nombre = int(listchiffre[i]) * 2
+        if nombre >= 10:
+            nombre = nombre-9
+        total += nombre
+        listchiffre[i] = str(nombre)
+    
+    for i in range(0,len(listchiffre),2):
+        total += int(listchiffre[i])
+
+    print(listchiffre)
+    print(total)
+    if total % 10 ==0:
+        result = True
+    else:
+         result = False
+         
+    print(result)
+
+algodeluhn(79927398713)   
+```
+
