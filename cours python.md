@@ -285,3 +285,4 @@ class MaClasse:
 ```
 Les variables initialisée dans une classes sont appelllé les **attributs** et les fonctions les **methodes**.
 Pour initialiser un attribut dans un objet, on utilise la methode speciale ```__init__```. Présente partout, elle est appelée la **méthode d'initialisation** et est utilisée pour attribuer des valeurs initiales aux variables qui composent un objet.
+
