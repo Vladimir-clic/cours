@@ -314,4 +314,16 @@ output = sorted(input, key = lambda inp: inp.score, reverse=True)
 ```
 Ici, nous avons une classe ```Toto``` qui prend en paramètre un score qui sera multiplié par 2. 
 
-### 
+### Générer des nombres aléatoires
+```python
+import random
+n = random.random() # Nombre entre 0.0 et 1.0
+n = random.randrange(0, 15) # Nombre entre 0 et 14
+```
+
+### Afficher un message avec un format particulier
+```python
+name = "Anna"
+howami = "depressed"
+print(f"Hello {name} how are you today ? Me I'm {howami}")
+```
