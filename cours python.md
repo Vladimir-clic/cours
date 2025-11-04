@@ -286,3 +286,32 @@ class MaClasse:
 Les variables initialisée dans une classes sont appelllé les **attributs** et les fonctions les **methodes**.
 Pour initialiser un attribut dans un objet, on utilise la methode speciale ```__init__```. Présente partout, elle est appelée la **méthode d'initialisation** et est utilisée pour attribuer des valeurs initiales aux variables qui composent un objet.
 
+### Mapper une opération à chaque élément d’une liste
+```python
+inputs = [ 1, 2, 3, 4 ]
+output = [ x**2 for x in inputs ]
+# Output = [ 1, 4, 9, 16 ]
+```
+Mapper une operation permet de l'appliquer à la liste, ici, on met au carré à chaque index de la liste (donc de façon exponentielle)
+
+### S’assurer qu’une condition est vraie
+```python
+assert condition == false # Erreur
+assert condition == true # OK
+```
+Permet de renvoyer true ou false en fonction du remplissage ou non de la condition
+
+### Trier une liste avec une comparaison custom
+```python
+class Toto:
+ def __init__(self, score):
+ self.score = score ** 2;
+input = [Toto(4), Toto(3), Toto(9)]
+output = sorted(input, key = lambda inp: inp.score)
+# Output contient les classes Toto, ordonnées du plus petit score, au plus grand
+output = sorted(input, key = lambda inp: inp.score, reverse=True)
+# Maintenant ordonnées du plus grand au plus petit :-)
+```
+Ici, nous avons une classe ```Toto``` qui prend en paramètre un score qui sera multiplié par 2. 
+
+### 
