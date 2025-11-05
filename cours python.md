@@ -286,13 +286,75 @@ class MaClasse:
 Les variables initialisée dans une classes sont appelllé les **attributs** et les fonctions les **methodes**.
 Pour initialiser un attribut dans un objet, on utilise la methode speciale ```__init__```. Présente partout, elle est appelée la **méthode d'initialisation** et est utilisée pour attribuer des valeurs initiales aux variables qui composent un objet.
 
+```python
+class Person:
+    def __init__(self, prenom, nom, age):
+        print("Initialisation de l'instance", self)
+        self.prenom = prenom
+        self.nom = nom
+        self.age = age
+        self.nationalite = "français"
+
+patrick = Person(prenom="Patrick", nom="Michaud", age=27)
+print(patrick.prenom, patrick.nom)
+print(patrick.nationalite)
+```
+Dans cet exemple, on met en paramètre de ```__init__``` les variables qui seront utiles à la classe. Une fois la classe crée, on peut instancier la classe en l'appelant sous un nom ```nouvelle classe = class() class.variable = "string" ```. Ici, c'est ``` patrick = Person(prenom="Patrick", nom="Michaud", age=27)```eEnsuite, pour appeler ces variables dans la classes ont note ```classe.variable```, dans l'exemple, cela se traduit par ```patrick.prenom``` pour obtenir le prenom de patrick.
+
+La méthode ```__init__``` est une methode spéciale, elle doit obligatoirement retourner ```None```, donc par de ```return``` à l'intérieur, à moins de retourner explicitement ```None```
+
+un autre exemple de création d'initialisation de classe : 
+```python
+class Chien:
+ def __init__(self, name):
+ self.name = name
+ self.age = 0
+ self.nb_ouaf = 0
+ def ouaf(self):
+ print("OUAF")
+ self.nb_ouaf +
+
+fido = Chien()
+ducon = Chien()
+fido.ouaf()
+ducon.ouaf()
+ducon.ouaf()
+print(fido.nb_ouaf, ducon.nb_ouaf) # Affiche "1 2"
+```
+#### L'heritage :
+On peut définir une classe comme la "continuité" d'une autre. On dit qu'elle hérite d'une autre classe. Toutes les **méthodes** et les **attributs** de la classe parente seront transmises :
+```python
+# création de classe normale
+class Animal:
+ def __init__(self):
+ self.age = 0
+ self.en_vie = True
+ def vieillir(self):
+ self.age += 1
+ if self.age > 30:
+ print("Couic")
+ self.en_vie = False
+
+# création d'une classe qui prend en paramètre et initialise la classe animal dans son init
+class Chien(Animal):
+ def __init__(self, name):
+ Animal.__init__(self)
+ self.name = name
+ def ouaf(self):
+ print("Ouaf")
+fido = Chien()
+fido.ouaf()
+fido.vieillir()
+```
+
 ### Mapper une opération à chaque élément d’une liste
 ```python
 inputs = [ 1, 2, 3, 4 ]
 output = [ x**2 for x in inputs ]
 # Output = [ 1, 4, 9, 16 ]
 ```
-Mapper une operation permet de l'appliquer à la liste, ici, on met au carré à chaque index de la liste (donc de façon exponentielle)
+Mapper une operation permet de l'appliquer à la liste, ici, on met au carré à chaque index de la liste (donc de façon exponentielle). Dans cet exemple, on instancie une liste puis on en crée une autre qui utilise une boucle ```for``` pour mettre tous les élément de cette liste au carré.
+
 
 ### S’assurer qu’une condition est vraie
 ```python
@@ -312,7 +374,7 @@ output = sorted(input, key = lambda inp: inp.score)
 output = sorted(input, key = lambda inp: inp.score, reverse=True)
 # Maintenant ordonnées du plus grand au plus petit :-)
 ```
-Ici, nous avons une classe ```Toto``` qui prend en paramètre un score qui sera multiplié par 2. 
+Ici, nous avons une classe ```Toto``` qui prend en paramètre un score qui sera multiplié par 2. output permet de les renvoyer dans la liste du plus petit au plus grand ou du plus grand au plus petit si ```reverse = True```
 
 ### Générer des nombres aléatoires
 ```python
@@ -320,10 +382,121 @@ import random
 n = random.random() # Nombre entre 0.0 et 1.0
 n = random.randrange(0, 15) # Nombre entre 0 et 14
 ```
+La fonction ```random.random()``` permet de créer un nombre aléatoire de 0.0 à 1.0 si il n'a pas de paramètre mais comme dans l'exemple, on peut lui mettre des paramètres pour le limiter ou augmenter ses possibilités.
+Ne pas oublier de l'importer ```import random```
 
 ### Afficher un message avec un format particulier
 ```python
 name = "Anna"
 howami = "depressed"
 print(f"Hello {name} how are you today ? Me I'm {howami}")
+```
+Permet d'écrire plus facilement des messages dans des variables sans virgule
+
+### Correction TP algorythme génétique : 
+```python
+#-*-encoding:utf-8*-
+
+NDIM=5
+XMIN=-4
+XMAX=4
+YMIN=0
+XOPTI=0
+
+PCT_BEST = 35
+NCELL = 2000
+
+import random
+import math
+
+def sphere(inputs):
+    s = 0
+    for x in inputs:
+        s += x ** 2
+    return s
+
+def salomon(inputs):
+    s = 0
+    for x in inputs:
+        s += x ** 2
+    u = math.pi * 2 * math.sqrt(s)
+    res = 1 - math.cos(u) + 0.1 * math.sqrt(s)
+    return res
+
+assert salomon([XOPTI, XOPTI]) == YMIN
+assert salomon([XMIN, XMAX]) > YMIN
+assert salomon([XMAX, XMIN]) > YMIN
+
+def conversion(gene):
+    # b = XMIN
+    # A = XMAX - XMIN
+    return (XMAX - XMIN) * gene + XMIN 
+
+assert conversion(0.0) == XMIN
+assert conversion(1.0) == XMAX
+assert conversion(0.5) == XOPTI
+
+def trad(genome):    # Liste de gènes
+    inputs = []
+    for gene in genome:
+        inputs.append(conversion(gene))
+    return inputs
+    
+assert trad([1.0, 0.0, 0.5]) == [XMAX, XMIN, XOPTI]
+
+class Cellule:
+    def __init__(self):
+        self.genome = []
+        for _ in range(0, NDIM):
+            self.genome.append(random.random())
+
+    def apply(self):
+        inputs = trad(self.genome)
+        # self.output = salomon(inputs)
+        self.output = sphere(inputs)
+
+    def reset(self):
+        self.output = None
+
+    def child(self):
+        enfant = Cellule()
+        enfant.genome = self.genome.copy()
+        n = random.randrange(0, len(enfant.genome))
+        enfant.genome[n] = random.random()
+        return enfant
+
+def opti():
+    # Initialisation
+    cellules = []
+    for _ in range(NCELL):
+        cellules.append(Cellule())
+
+    nbgeneration = 0
+    while True:
+        # Pour chaque génération:
+        for cell in cellules:
+            cell.apply()
+        # On sélectionne les meilleures cellules
+        trie = sorted(cellules, key = lambda inp: inp.output)
+        print("GEN", nbgeneration, "SCORE", trie[0].output, "GENOME", trie[0].genome)
+        # On calcule combien de cellules on garde (X% meilleures)
+        ncut = NCELL * (PCT_BEST / 100)
+
+        # On supprime toutes les autres cellules (pas dans les X% meilleures)
+        cellules = trie[:int(ncut)]
+        parent = 0
+        while len(cellules) < NCELL:
+            # On complète la génération par des enfants
+            cellule_parent = cellules[parent]
+            parent += 1    # L'index du parent qu'on sélectionne pour créer l'enfant
+            if parent >= ncut:
+                parent = 0
+            enfant = cellule_parent.child()    # On créé l'enfant
+            cellules.append(enfant)    # On ajoute à la liste des cellules (pour la next gen)
+
+        # Et z'est repartiiiiiiiiii
+        nbgeneration += 1
+        assert len(cellules) == NCELL
+
+opti()
 ```
