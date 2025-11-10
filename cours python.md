@@ -573,3 +573,44 @@ travail_long()
 # --> Fait !
 # --> Fonction effectuée en 1.0009217262268066 secondes
 ```
+
+Renvoyer une erreur : le décorateur peut servir à renvoyer une erreur si les paramètres de la fonction ne sont pas correct grâce à la librairie ```traceback``` :
+```python
+import traceback
+
+def ignore_erreurs(fonction):
+    def decorateur(*args):
+        try: 
+            fonction(*args)
+        except Exception as e:
+            print(f"Erreur capturée dans {fonction.__name__} : {e}")
+    return decorateur
+
+@ignore_erreurs
+def diviser(a,b):
+    print(a / b)
+
+
+diviser(10,2)
+diviser(10,0)
+
+#resultat :
+# --> 5.0
+# erreur
+```
+Il arrive que le décorateur prenne un paramètre autre que la fonction, dans ce cas, on doit créer une fonction décorateur qui prend la fonction à décorer en paramètre et contient une autre fonction qui prend les arguments de la fonction décorée en paramètre et qui les donne à cette dernière :
+```python
+def repete(n):
+    def decorateur(fonction):
+        def wrapper(*args, **kwargs):
+            for _ in range(n):
+                fonction(*args, **kwargs)
+        return wrapper
+    return decorateur
+
+@repete(3)
+def coucou():
+    print("Coucou !")
+
+coucou()
+```
