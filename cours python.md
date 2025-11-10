@@ -550,3 +550,26 @@ Ici, nous sommes dans un cas où les fonctions décorée ont des paramètres. Po
 * ```*args``` : liste des variables
 * ```*args``` : dictionnaire pour les listes
 Puis, on retourne la fonction avec des ```*args``` et ```**kwargs``` en paramètres avant de conclure en retournant la fonction crée dans le décorateur.
+
+Un décorateur peut servir à mesurer le temps que mettent les instructions à s'effectuer, voilà un exemple en utilisant ```time```
+```python
+import time
+
+def chronometre(fonction):
+    start_time = time.time()
+    fonction()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Fonction effectuée en {elapsed_time} secondes")
+
+@chronometre
+def travail_long():
+    time.sleep(1)
+    print("Fait !")
+
+travail_long()
+
+# resultat :
+# --> Fait !
+# --> Fonction effectuée en 1.0009217262268066 secondes
+```
