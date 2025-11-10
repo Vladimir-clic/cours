@@ -500,3 +500,53 @@ def opti():
 
 opti()
 ```
+
+### Les décorateurs : 
+Les décorateurs sont des éléments important en python, ils permettent d'ajouter du code à une fonction sans modifier cette même fonction. Un décorateur s'écrit comme une fonction mais il se fait appeler avec un ```@``` au dessus de la fonction qu'il prend en paramètre : exemple :
+```python
+def mon_decorateur(fonction):
+    print(f"Appel de la fonction")
+    fonction()
+
+@mon_decorateur
+def dis_bonjour():
+    print("Bonjour ! ")
+
+dis_bonjour
+
+# result : 
+#--> Appel de la fonction
+#--> Bonjour ! 
+```
+
+Dans cet exemple, la fonction a appeler ne prend pas de paramètre mais si elle en prenait, l'affaire se compliquerai :
+```python
+def log_appel(fonction):
+    def decorateur(*args, **kwargs):
+        print(f"Appel de la fonction avec args=({args}), kwars=({kwargs})")
+        return fonction(*args, **kwargs)
+    return decorateur
+
+@log_appel
+def addition(a, b):
+    print(a + b)
+
+@log_appel
+def dire(message, fois=1):
+    for _ in range(fois):
+        print(message)
+
+addition(3, 7)
+dire("Coucou", fois=2)
+
+# résultat : 
+# --> Appel de la fonction avec args=((3, 7)), kwars=({})
+# --> 10
+# --> Appel de la fonction avec args=(('Coucou',)), kwars=({'fois': 2})
+# --> Coucou
+# --> Coucou
+```
+Ici, nous sommes dans un cas où les fonctions décorée ont des paramètres. Pour appeler la fonction avec ces même paramètres dans le decorateur, on est obligé de créer une nouvelle fonction dans le décorateur qui prend en paramètre ```*args``` et ```**kwargs``` :
+* ```*args``` : liste des variables
+* ```*args``` : dictionnaire pour les listes
+Puis, on retourne la fonction avec des ```*args``` et ```**kwargs``` en paramètres avant de conclure en retournant la fonction crée dans le décorateur.
