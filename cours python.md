@@ -614,3 +614,33 @@ def coucou():
 
 coucou()
 ```
+
+### Thread
+L'utilisation des threads est très pratique pour exécuter des actions en même temps. Pour cela, il faut deux composant : 
+* importer la librairie : ```import threading```
+* initialiser le thread : ```mon_thread = threading.Thread(target=fonction)```
+Puis, on peut lancer le thread ```mon_thread.start()``` et ```mon_thread.join``` qui attend la fin du thread pour continuer le programme. Donc, tout ce qui est entre les deux sera lancé parallèlement a la fonction dans thread. Exemple :
+
+```python
+import threading
+import time
+
+def dire_bonjour():
+    print("Bonjour !")
+    time.sleep(1)
+    print("Au revoir !")
+
+mon_thread = threading.Thread(target=dire_bonjour)
+
+print("Début du programme")
+mon_thread.start()
+print("Fin du programme")
+mon_thread.join()
+
+# résultat : 
+# --> Début du programme
+# --> Bonjour !
+# --> Fin du programme
+# --> Au revoir !
+```
+On note que dans l'exemple, comme le thread prenait trop de temps, le programme à affiché ```Fin du programme``` avant de terminer le thread, si on veut annoncer la fin du programme après la fin du thread, il suffit de ```.join``` le thread directement après son lancement (ce qui ferait perdre tout son intéret au thread).
