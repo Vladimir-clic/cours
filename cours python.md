@@ -679,3 +679,39 @@ thread3.join()
 # --> Thread 3 terminé
 # --> Thread 2 terminé
 ```
+L'utilisation de thread est complexe et provoque nombre de bug. Par exemple, lorsque plusieurs thread exécute une même fonction. Pour ça, on peut utiliser des ```lock()```. Ils se compose de 2 commandes principales : 
+* ```lock.acquire()``` : n'autorise qu'un thread à passer
+* ```lock.release()``` : libère la place pour un autre thread
+
+Exemple d'utilisation de lock : 
+```python
+import threading
+
+lock = threading.Lock()
+compteur = 0
+
+def incrementer():
+    global compteur
+    
+    if lock.acquire():
+        try:
+            for i in range(100000):
+                compteur += 1
+        finally:
+            lock.release()
+
+thread1 = threading.Thread(target=incrementer)
+thread2 = threading.Thread(target=incrementer)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+
+print(f"Le compteur est à {compteur}")
+
+# résultat : 
+# --> Le compteur est à 200000
+```
