@@ -644,3 +644,38 @@ mon_thread.join()
 # --> Au revoir !
 ```
 On note que dans l'exemple, comme le thread prenait trop de temps, le programme à affiché ```Fin du programme``` avant de terminer le thread, si on veut annoncer la fin du programme après la fin du thread, il suffit de ```.join``` le thread directement après son lancement (ce qui ferait perdre tout son intéret au thread).
+
+Lorsque l'on appelle des fonction avec des arguments, la création du thread change un peu, si on fait : ```thread = threading.Thread(target=fonction(variable))```, le programme va lancer la fonction immédiatement sans prendre en compte le thread. Pour que cela fonctionne, il faut séparer la fonction des arguments : ```thread = threading.Thread(target=fonction, args=(variable,))```. Voilà un exemple de programme avec plusieurs thread en même temps :
+
+```python
+import threading
+import time
+
+def travail(num):
+    print(f"Thread {num} commence !")
+    time.sleep(2)
+    print(f"Thread {num} terminé")
+
+thread1 = threading.Thread(target=travail, args=(1,))
+thread2 = threading.Thread(target=travail, args=(2,))
+thread3 = threading.Thread(target=travail, args=(3,))
+
+print("début du programme")
+thread1.start()
+thread2.start()
+thread3.start()
+print("Fin du programme")
+thread1.join()
+thread2.join()
+thread3.join()
+
+# resultat : 
+# --> début du programme
+# --> Thread 1 commence !
+# --> Thread 2 commence !
+# --> Thread 3 commence !
+# --> Fin du programme
+# --> Thread 1 terminé
+# --> Thread 3 terminé
+# --> Thread 2 terminé
+```
