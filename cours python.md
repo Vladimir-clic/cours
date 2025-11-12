@@ -715,3 +715,46 @@ print(f"Le compteur est à {compteur}")
 # résultat : 
 # --> Le compteur est à 200000
 ```
+
+Créer des files d'attente avec Queue :
+```python
+import queue
+import threading
+import time
+
+def travailleur(q):
+    while not q.empty():
+        tache = q.get()
+        print(f"Thread {threading.current_thread().name} execute la tâche {tache}")
+        time.sleep(0.5)
+        q.task.done()
+
+q = queue.Queue()
+
+thread1 = threading.Thread(target=travailleur, args=(q, ))
+thread2 = threading.Thread(target=travailleur, args=(q, ))
+thread3 = threading.Thread(target=travailleur, args=(q, ))
+
+q.put("ex")
+thread1.start()
+q.put("toto")
+thread2.start()
+q.put(1)
+thread3.start()
+
+# resultat : 
+# --> Thread Thread-1 (travailleur) execute la tâche ex
+# --> Thread Thread-2 (travailleur) execute la tâche toto
+# --> Thread Thread-3 (travailleur) execute la tâche 1
+# --> Exception in thread Thread-2 (travailleur):
+# --> Exception in thread Thread-1 (travailleur):
+# --> Exception in thread Thread-3 (travailleur):
+```
+
+```queue.Queue()``` est une structure thread-safe (sécurisée pour l’accès concurrent).
+Elle gère automatiquement les verrous internes pour éviter les conflits.
+Chaque thread peut :
+* ajouter une tâche avec ```q.put(item)```
+* récupérer une tâche avec ```q.get()```
+* vérifier si il reste des taches avec ```q.empty()```
+* indiquer que la tâche est terminée avec ```task_done()```
