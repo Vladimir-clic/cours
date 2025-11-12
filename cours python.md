@@ -821,3 +821,51 @@ thread2.start()
 # --> Signal reçus, lancement de la fusée
 ```
 
+exercice solo : 
+```python
+import threading
+import time
+
+barriere = threading.Barrier(3)
+depart = threading.Event()
+annonce = threading.Event()
+
+medaille = True
+coureurdict ={}
+
+def course(num):
+    global medaille
+    global coureurdict
+    
+    departtime = time.time()
+    print(f"Coureur {num} prêt")
+    barriere.wait()
+    depart.wait()
+    print(f"Coureur {num} court !")
+    endtime = time.time()
+    duree = endtime - departtime
+
+    coureurdict[num] = duree
+    annonce.set()
+
+def remisemedaille():
+    annonce.wait()
+    time.sleep(1)
+    participants = dict(sorted(coureurdict.items(), key=lambda item: item[1]))
+    for p in participants:
+        print(f"{p}, {participants[p]}")
+
+def lancement():
+    print("Tous en position ...")
+    time.sleep(2)
+    print("Depart !")
+    depart.set()
+
+threads = [threading.Thread(target=course, args=(i, )) for i in range(1,4)]
+threaddepart = threading.Thread(target=lancement)
+threadannonce = threading.Thread(target=remisemedaille)
+
+for t in threads : t.start()
+threaddepart.start()
+threadannonce.start()
+```
