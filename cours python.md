@@ -758,3 +758,65 @@ Chaque thread peut :
 * récupérer une tâche avec ```q.get()```
 * vérifier si il reste des taches avec ```q.empty()```
 * indiquer que la tâche est terminée avec ```task_done()```
+
+### Les Barrères
+Les barrières ```threading.Barrier()```permettent de créer des barrières qui vont obliger bloquer la route aux thread tant que le nombre de thread arrêté sera inférieur à la valeur entre parenthèse :
+```python
+import threading
+import time
+
+barriere = threading.Barrier(4)
+
+def fonction(num):
+    time.sleep(num)
+    print(f"Thread {num} a terminé l'étape 1")
+    barriere.wait()
+    print(f"Thread {num} a terminé l'étape 2")
+
+threads = [threading.Thread(target=fonction, args=(i, )) for i in range(4)]
+for t in threads : t.start()
+
+# resultat : 
+# --> Thread 0 a terminé l'étape 1
+# --> Thread 1 a terminé l'étape 1
+# --> Thread 2 a terminé l'étape 1
+# --> Thread 3 a terminé l'étape 1
+# --> Thread 3 a terminé l'étape 2
+# --> Thread 0 a terminé l'étape 2
+# --> Thread 2 a terminé l'étape 2
+# --> Thread 1 a terminé l'étape 2
+```
+attention à ne pas oublié ```Barrier.wait()```
+
+### Event
+Event ```threading.Event()``` permet d'attendre qu'un évènement soit lancé pour permettre à un thread d'exécuter sa fonction :
+
+```python
+import threading
+import time
+
+signal = threading.Event()
+
+def attentesignal():
+    print("En attente du signal ...")
+    signal.wait()
+    print("Signal reçus, lancement de la fusée")
+
+def lancementsignal():
+    print("Obtention du signal en cours ...")
+    time.sleep(3)
+    print("Envoi du signal ...")
+    signal.set()
+
+thread1 = threading.Thread(target=attentesignal)
+thread2 = threading.Thread(target=lancementsignal)
+
+thread1.start()
+thread2.start()
+
+# resultat : 
+# --> En attente du signal ...
+# --> Obtention du signal en cours ...
+# --> Envoi du signal ...
+# --> Signal reçus, lancement de la fusée
+```
