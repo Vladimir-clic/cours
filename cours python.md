@@ -786,7 +786,7 @@ for t in threads : t.start()
 # --> Thread 2 a terminé l'étape 2
 # --> Thread 1 a terminé l'étape 2
 ```
-attention à ne pas oublié ```Barrier.wait()```
+attention à ne pas oublier ```Barrier.wait()```
 
 ### Event
 Event ```threading.Event()``` permet d'attendre qu'un évènement soit lancé pour permettre à un thread d'exécuter sa fonction :
@@ -820,3 +820,4 @@ thread2.start()
 # --> Envoi du signal ...
 # --> Signal reçus, lancement de la fusée
 ```
+
