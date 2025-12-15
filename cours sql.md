@@ -6,6 +6,11 @@ Il existe 2 types de relations entre les tables :\
 -relation avec une clé étrangère\
 -relation avec une table de jointure
 
+En sql, on fait des schémas pour organiser nos bases de données, il y en a deux sortes :
+* Merise (MCD, MLD, MDP)
+
+* UML
+
 En sql, on considère que le signe ```*``` signifie "tout"
 
 
