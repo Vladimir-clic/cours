@@ -259,7 +259,7 @@ f_id|f_nom_fr_fr|f_nom_en_gb|
 |89|Poire|Pear|
 
 On peut donc utiliser la commande ```CROSS JOIN``` comme ceci :
-```
+```sql
 SELECT l_id, l_nom_fr_fr, f_id, f_nom_fr_fr
 FROM legume
 CROSS JOIN fruit
