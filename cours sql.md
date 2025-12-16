@@ -290,6 +290,7 @@ La relation entre ces deux tables est donc (sur un schéma merise) :
 
 ```pokemon```--1,1---------0,n--```joueur```
 
+![image csharp](https://lh5.googleusercontent.com/proxy/hwujmQQRf1QNGV7-Ci6U5lYxpIrSiUfrDN6qZVT37E1t8xB38zZBC4e-ZywHcH6SVBWn9si2f3PPHA "Un bien beau logo !")
 
 En sql, voilà ce que cela donne : 
 * Player
