@@ -280,3 +280,53 @@ l_id|l_nom_fr_fr|f_id|f_nom_fr_fr|
 
 3 colonne multiplié par 3 colonne, 9 colonnes avec à chaque fois toutes les variantes possible (le même résultat est atteignable sans utiliser ```CROSS JOIN```
 
+
+## Relations Clé Étrangère :
+Il existe plusieurs types de relations entre les tables, pour expliquer ces relations, nous allons utiliser des pokemons :
+* Un joueur peut avoir plusieurs pokemons,
+* Un pokemon peut avoir un seul joueur
+
+La relation entre ces deux tables est donc (sur un schéma merise) :
+
+```pokemon```--1,1---------0,n--```joueur```
+
+
+En sql, voilà ce que cela donne : 
+* Player
+```sql
+DROP TABLE IF EXISTS Player;
+CREATE TABLE Player
+(
+	Id INT PRIMARY KEY auto_increment,
+    Name VARCHAR(100),
+    -- Pokemonplayer_id INT NOT NULL,
+    Inventaire_id INT NOT NULL,
+    -- CONSTRAINT PK_player PRIMARY KEY (PokemonPlayer_id,Inventaire_id),
+    -- FOREIGN KEY (Pokemonplayer_id) REFERENCES Pokemonplayer(Id),
+    FOREIGN KEY (Inventaire_id) REFERENCES Inventaire(Id)
+);
+```
+* PokemonPlayer
+```sql
+DROP TABLE IF EXISTS Pokemonplayer;
+CREATE TABLE Pokemonplayer
+(
+	Id INT PRIMARY KEY auto_increment,
+    Level INT,
+    XP INT,
+    Hp INT,
+    Player_id INT,
+    Ability_id INT,
+    -- CONSTRAINT PK_pokemonplayer PRIMARY KEY (Player_id,Ability_id),
+    FOREIGN KEY (Player_id) REFERENCES Player(Id),
+    FOREIGN KEY (Ability_id) REFERENCES Ability(Id)
+);
+```
+* Exemple de Select
+```sql
+SELECT p.Name, pp.Level, pp.Hp
+FROM Player p
+JOIN Pokemonplayer pp ON pp.Player_id = p.Id
+WHERE p.Id = 1;
+```
+
