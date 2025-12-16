@@ -15,7 +15,7 @@ En sql, on considère que le signe ```*``` signifie "tout"
 
 
 
-
+![image mysql](https://upload.wikimedia.org/wikipedia/fr/6/62/MySQL.svg "Un bien beau logo !")
 
 
 ## Comment créer des bases de données ?
