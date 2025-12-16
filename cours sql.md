@@ -299,11 +299,7 @@ CREATE TABLE Player
 (
 	Id INT PRIMARY KEY auto_increment,
     Name VARCHAR(100),
-    -- Pokemonplayer_id INT NOT NULL,
     Inventaire_id INT NOT NULL,
-    -- CONSTRAINT PK_player PRIMARY KEY (PokemonPlayer_id,Inventaire_id),
-    -- FOREIGN KEY (Pokemonplayer_id) REFERENCES Pokemonplayer(Id),
-    FOREIGN KEY (Inventaire_id) REFERENCES Inventaire(Id)
 );
 ```
 * PokemonPlayer
@@ -317,9 +313,7 @@ CREATE TABLE Pokemonplayer
     Hp INT,
     Player_id INT,
     Ability_id INT,
-    -- CONSTRAINT PK_pokemonplayer PRIMARY KEY (Player_id,Ability_id),
     FOREIGN KEY (Player_id) REFERENCES Player(Id),
-    FOREIGN KEY (Ability_id) REFERENCES Ability(Id)
 );
 ```
 * Exemple de Select
