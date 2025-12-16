@@ -324,3 +324,15 @@ JOIN Pokemonplayer pp ON pp.Player_id = p.Id
 WHERE p.Id = 1;
 ```
 
+### Supprimer et réinsérer des INSERT
+Quand on fait des inserts, pour éviter les problèmes ou l'accumulations de donnée, on peut être tenté de tout supprimer AVANT l'insertion :
+```sql
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE table1
+TRUNCATE TABLE table2
+TRUNCATE TABLE table3
+
+SET FOREIGN_KEY_CHECKS = 1;
+```
+```TRUNCATE TABLE``` vide entièrement la table, ```SET FOREIGN_KEY_CHECKS``` désactive les clés étrangères et les réactive après la suppression des tables pour éviter d'éventuels bugs
