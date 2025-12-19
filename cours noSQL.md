@@ -79,3 +79,15 @@ db.players.aggregate([
   }
 ])
 ```
+
+## routes
+
+Quand on fait du NoSQL dans une api, on peut être amené à en faire en javascript, cela s'écrit ainsi : 
+```js
+router.get('/pokemons', async (req, res) => {
+
+        const pokemons = await Pokemon.find()
+
+    return httpApiResponse(res, 200, 'Pokemons retrieved successfully', pokemons);
+});
+```
