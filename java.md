@@ -65,6 +65,19 @@ on fait tout en public, on se prend pas la tête
 ```java
 
 ```
+## Encapsulation :
+```java
+public class Compte {
+    private double solde;
+
+    public void deposer(double montant) {
+        solde += montant;
+    }
+    public double getSolde() {
+    r    eturn solde;
+    }
+}
+```
 
 ## Héritage : 
 ```java
@@ -75,3 +88,38 @@ public class Voiture extends Vehicule {
     int nombreDePortes;
 }
 ```
+
+Une classe = un fichier
+Quand on fait une demo = on crée une classe pour lancer un main (exemple : DemArrayList (en pascalcase))
+```Control + Alt + l ``` pour remettre bien le code (pour jetbrain)
+bonne pratique : si on a créer un constructeur avec un paramètre, il faut créer un constructeur vide explicitement pour pas se faire piéger (propre à java)
+ex : 
+si on a dans un code : 
+```java
+    public static void main(String[] args) {
+
+        Vehicle vehicle1 = new Vehicle();
+    }
+```
+dans vehicle, on doit instancier un constructeur vide :
+```java
+public class Vehicle {
+
+    public String name;
+
+    public Vehicle(){} //celui là !
+}
+```
+un constructeur sert à faire des new, des objects avec des constructeurs par défauts
+
+```java
+public class Vehicle {
+
+    public String name;
+
+    public Vehicle(String name){
+        this.name = name;
+    } 
+}
+```
+quand on a des nom qui ont le même sens, on met un ```this``` pour faire comprendre au code que c'est la même chose
