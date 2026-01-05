@@ -149,3 +149,7 @@ Dans un jeu d'échec, on dirait "j'ai une liste de pieces" plutôt qu'une liste 
 
 classe : PascalCase
 variable, fonction : camelCase
+
+## les supers en JAVA
+
+super est un "this" de la classe parente ```super.move()```
