@@ -123,3 +123,29 @@ public class Vehicle {
 }
 ```
 quand on a des nom qui ont le même sens, on met un ```this``` pour faire comprendre au code que c'est la même chose
+
+## mettre les éléments dans une liste
+```java
+        //faire une liste
+        // toujours instancier au moins à vide
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+
+        //ajouter des éléments
+        vehicles.add(vehicle1);
+        vehicles.add(vehicle2);
+```
+
+toutes les classes héritent d'une classe "objet" en cachette crée par l'ide
+
+si on crée une liste qui prend en paramètre la classe object, on peut tout mettre dedans, on appelle ça le polymorphisme : 
+```java
+ArrayList<Object> ListDeTout = new ArrayList<>();
+    ListDeTout.add(vehicle1);
+    ListDeTout.add("nomtest");
+    ListDeTout.add(true);
+```
+
+Dans un jeu d'échec, on dirait "j'ai une liste de pieces" plutôt qu'une liste de "j'ai une liste de rois", "j'ai une liste de pions", "j'ai une liste de cavaliers", etc... Donc on fait du polymorphisme, tout hérite de pièces.
+
+classe : PascalCase
+variable, fonction : camelCase
