@@ -1,6 +1,10 @@
 # Cours JAVA :
 
+On fait tout en public, on se prend pas la tête
 Java n'a rien à voir avec javascript, il ressemble plus au c# :
+
+classe : PascalCase
+variable, fonction : camelCase
 
 faire un hello world : 
 ```java
@@ -10,8 +14,8 @@ public class Main {
     }
 }
 ```
-
 une classe = un fichier
+Sur Intellig, quand on crée une nouvelle classe, on crée un nouveau fichier par soucis de lisibilité. Les classes nous permettent d'instancier des variables que l'on assignera dans le **main** :
 
 créer une personne : 
 ```java
@@ -19,7 +23,9 @@ class Person {
     //bloc person qui peut avoir un prénom
     public String firstname;
 }
-
+```
+Assigner les variables à personne dans le main : 
+```
 public class Main {
     public static void main(String[]args) {
 
@@ -48,22 +54,50 @@ boolean actif = true;
 ## Modèle de classe : 
 ```java
 public class Voiture {
-String couleur;
-int vitesse;
-void accelerer() {
-vitesse = vitesse + 10;
+    String couleur;
+    int vitesse;
+    void accelerer() {
+        vitesse = vitesse + 10;
+    }
 }
-}
+
 Voiture v = new Voiture();
 v.couleur = "Rouge";
 v.accelerer();
 ```
 
-on fait tout en public, on se prend pas la tête
+## Constructeur :
+
+On ne l'a pas fait jusqu'ici par soucis de simplicité mais il est important d'utiliser des constructeurs lors de la création d'une classe. Le constructeur reprend toutes les variables de la classe et les assignes à eux même (utile lorsque l'on fera des héritages.
+```java
+public class Monster {
+
+    //création des variables
+    public String type;
+    public String species;
+
+    //création du constructeur
+    public Monster(String name){
+        //assignation des variables
+        this.species = species;
+        this.type = type;
+    }
+```
+Le mot-clé ```this``` en Java est une variable de référence qui se réfère à l'objet actuel. Il est utilisé dans une méthode d'instance ou un constructeur pour accéder aux membres de l'objet courant tels que les variables d'instance, les méthodes et les constructeurs.
+
 
 ## Contrôle du flux: 
+Condition (if) :
 ```java
+if (age >= 18) {
+System.out.println("Majeur");
+```
 
+Boucle (for) :
+```java
+for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
 ```
 ## Encapsulation :
 ```java
@@ -89,9 +123,12 @@ public class Voiture extends Vehicule {
 }
 ```
 
+## Bonnes pratiques :
 Une classe = un fichier
 Quand on fait une demo = on crée une classe pour lancer un main (exemple : DemArrayList (en pascalcase))
-```Control + Alt + l ``` pour remettre bien le code (pour jetbrain)
+```Control + Alt + l ``` pour remettre bien le code (pour jetbrain).
+
+
 bonne pratique : si on a créer un constructeur avec un paramètre, il faut créer un constructeur vide explicitement pour pas se faire piéger (propre à java)
 ex : 
 si on a dans un code : 
@@ -147,9 +184,21 @@ ArrayList<Object> ListDeTout = new ArrayList<>();
 
 Dans un jeu d'échec, on dirait "j'ai une liste de pieces" plutôt qu'une liste de "j'ai une liste de rois", "j'ai une liste de pions", "j'ai une liste de cavaliers", etc... Donc on fait du polymorphisme, tout hérite de pièces.
 
-classe : PascalCase
-variable, fonction : camelCase
+
 
 ## les supers en JAVA
 
 super est un "this" de la classe parente ```super.move()```
+```java
+public class Monster extends Character {
+
+    public String type;
+    public String species;
+
+    public Monster(String name){
+        super(); // appel du constructeur
+        super.name = name; //variable name héritée
+        this.species = species;
+        this.type = type;
+    }
+```
