@@ -83,6 +83,7 @@ public class Monster {
         this.type = type;
     }
 ```
+Lorsqu'il y a plusieurs variable dans le constructeur, bien penser à mettre leur type à chaque fois (ex : ```public Monster(String name, String color){```)
 Le mot-clé ```this``` en Java est une variable de référence qui se réfère à l'objet actuel. Il est utilisé dans une méthode d'instance ou un constructeur pour accéder aux membres de l'objet courant tels que les variables d'instance, les méthodes et les constructeurs.
 
 
