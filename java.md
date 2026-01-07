@@ -25,7 +25,7 @@ class Person {
 }
 ```
 Assigner les variables à personne dans le main : 
-```
+```java
 public class Main {
     public static void main(String[]args) {
 
