@@ -916,3 +916,80 @@ bouton.pack()
 
 Dans l'exemple, le bouton appelle une fonction ```acheter()``` qui écrit dans le terminal si le bouton à été actionné. Le bouton quant à lui se définit de la même façon qu'un label, à l'exception qu'il à une ```command``` qui est la fonction à appeller si il est actionné (à noté qu'on peut également modifier sa police avec ```font```).
 
+Utiliser des frames et des containers pour changer de pages : 
+```python
+import tkinter as tk
+
+# =========================
+# FENETRE PRINCIPALE
+# =========================
+
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Exemple Frames")
+        self.geometry("400x200")
+
+        # conteneur principal
+        container = tk.Frame(self)
+        container.pack(fill="both", expand=True)
+
+        # dictionnaire pour stocker les pages
+        self.frames = {}
+
+        # création des pages
+        for Page in (Menu, Boutique):
+            frame = Page(container, self)
+            self.frames[Page] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        # afficher la première page
+        self.show_frame(Menu)
+
+    def show_frame(self, page):
+        frame = self.frames[page]
+        frame.tkraise()
+
+
+# =========================
+# PAGE 1 : MENU
+# =========================
+
+class Menu(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+
+        tk.Label(self, text="MENU", font=("Arial", 20)).pack(pady=20)
+
+        tk.Button(
+            self,
+            text="Aller à la boutique",
+            command=lambda: controller.show_frame(Boutique)
+        ).pack()
+
+
+# =========================
+# PAGE 2 : BOUTIQUE
+# =========================
+
+class Boutique(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+
+        tk.Label(self, text="BOUTIQUE", font=("Arial", 20)).pack(pady=20)
+
+        tk.Button(
+            self,
+            text="Retour au menu",
+            command=lambda: controller.show_frame(Menu)
+        ).pack()
+
+
+# =========================
+# LANCEMENT
+# =========================
+
+app = App()
+app.mainloop()
+```
