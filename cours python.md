@@ -869,3 +869,50 @@ for t in threads : t.start()
 threaddepart.start()
 threadannonce.start()
 ```
+
+## Création d'un jeu vidéo avec python : 
+
+Python est un langage qui permet de nombreuses choses grâces aux bibliothèques que l'on peut importer. En Python, pour faire une interface graphique simple, la plus accessible est **tkinter** ```import tkinter as tk```.
+Elle permet de créer :
+* une fenêtre
+* des boutons
+* des textes
+* des affichages dynamiques
+
+C’est la bibliothèque graphique incluse de base avec Python.
+
+### Création de l'écran : 
+Création d'une fenêtre : 
+```python
+import tkinter as tk
+
+# créer la fenêtre
+fenetre = tk.Tk()
+fenetre.title("Vache à Lait 🐄")
+fenetre.geometry("600x400")
+
+# lancer la boucle graphique
+fenetre.mainloop()
+```
+
+Pour créer une fenêtre, on attribue à notre variable ```fenêtre``` les informations de la classe issu de la bibliothèque ```tk``` : ```tk.Tk()```. Mais pour l'instant, cette fenêtre est vide : elle n'a ni dimensions, ni nom. Si on se contente de lancer le code, cela ne fonctionnera tout simplement pas. Donc on doit lui attribuer une taille : ```fenetre.geometry("600x400")``` qui lui donne une dimension. On peut également lui donner un titre : ```fenetre.title("Nom de la fenêtre")``` en soit, on en a pas réellement besoin, si on ne le fait pas, la fenêtre s'appellera juste "tk". Une fois tout cela fait, on peut enfin lancer notre code avec ```fenetre.mainloop()``` qui appelle la fonction ```mainloop``` dans la fenêtre qu'on vient de créer.
+
+Ajout de texte dans la fenêtre : 
+```python
+label = tk.Label(fenetre, text="Bienvenue dans Vache à Lait", font=("Arial", 16))
+label.pack()
+```
+
+Pour pouvoir écrire des informations dans notre fenêtre, on utilise les **labels**. On définit une variable label qui hérite de la fenêtre, du texte à écrire puis de sa police. On n'oublie pas de penser à l'appeler à la fin avec ```.pack()```
+
+Créer un bouton : 
+```python
+def acheter():
+    print("Bouton acheter cliqué")
+
+bouton = tk.Button(fenetre, text="Acheter une vache", command=acheter)
+bouton.pack()
+```
+
+Dans l'exemple, le bouton appelle une fonction ```acheter()``` qui écrit dans le terminal si le bouton à été actionné. Le bouton quant à lui se définit de la même façon qu'un label, à l'exception qu'il à une ```command``` qui est la fonction à appeller si il est actionné (à noté qu'on peut également modifier sa police avec ```font```).
+
