@@ -870,6 +870,25 @@ threaddepart.start()
 threadannonce.start()
 ```
 
+## afficher des images avec matplotlib
+```python
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import os
+
+os.chdir("./img/") #dossier où se trouve les images
+
+solo = mpimg.imread('solo-256px.png')
+starwars = mpimg.imread('logo-starwars-256px.png')
+
+
+#affichage
+plt.imshow(solo)
+#plt.imshow(starwars)
+plt.show()
+```
+
+
 ## Création d'un jeu vidéo avec python : 
 
 Python est un langage qui permet de nombreuses choses grâces aux bibliothèques que l'on peut importer. En Python, pour faire une interface graphique simple, la plus accessible est **tkinter** ```import tkinter as tk```.
@@ -1009,3 +1028,4 @@ def valider():
 
 # bouton
 tk.Button(fenetre, text="Valider", command=valider).pack()
+
