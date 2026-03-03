@@ -935,6 +935,20 @@ bouton.pack()
 
 Dans l'exemple, le bouton appelle une fonction ```acheter()``` qui écrit dans le terminal si le bouton à été actionné. Le bouton quant à lui se définit de la même façon qu'un label, à l'exception qu'il à une ```command``` qui est la fonction à appeller si il est actionné (à noté qu'on peut également modifier sa police avec ```font```).
 
+Mettre une image en tant que bouton : 
+```python
+self.vache_img = tk.PhotoImage(file="vache.png")
+
+self.bouton_vache = tk.Button(
+    self.actions,
+    image=self.vache_img,
+    command=lambda: clicpourlait(player),
+    bd=0
+)
+self.bouton_vache.pack(pady=20)
+```
+
+
 Utiliser des frames et des containers pour changer de pages : 
 ```python
 import tkinter as tk
@@ -1028,4 +1042,5 @@ def valider():
 
 # bouton
 tk.Button(fenetre, text="Valider", command=valider).pack()
+
 
